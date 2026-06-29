@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import { connectDB } from './config/db';
+import { connectDB, getDbStatus } from './config/db';
 import { RefugioController } from './interfaces/controllers/RefugioController';
 import { createRefugioRoutes } from './interfaces/routes/refugioRoutes';
 import { errorHandler } from './interfaces/middleware/errorHandler';
@@ -21,7 +21,8 @@ async function main(): Promise<void> {
     process.exit(1);
   }
 
-  await connectDB(mongoUri);
+  // Conexión no bloqueante — la API arranca aunque MongoDB no esté listo
+  connectDB(mongoUri);
 
   // Inicializa cache Redis (la conexión es lazy — si REDIS_URL no está o falla,
   // el cache se desactiva y la API funciona igual)
@@ -55,7 +56,19 @@ async function main(): Promise<void> {
 
   // Health check
   app.get('/health', (_req, res) => {
-    res.json({ status: 'ok', timestamp: new Date().toISOString() });
+    const mongoStatus = getDbStatus();
+    const redisService = RedisCacheService.getInstance();
+
+    const allOk = mongoStatus === 'connected';
+
+    res.json({
+      status: allOk ? 'ok' : 'degraded',
+      services: {
+        mongo: mongoStatus,
+        redis: redisService.isConnected ? 'connected' : 'disabled',
+      },
+      timestamp: new Date().toISOString(),
+    });
   });
 
   // Dependency injection: controller recibe el repositorio

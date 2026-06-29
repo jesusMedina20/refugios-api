@@ -228,7 +228,7 @@ async function seed(): Promise<void> {
     process.exit(1);
   }
 
-  await connectDB(mongoUri);
+  await connectDB(mongoUri, { exitOnFail: true });
 
   console.log('[SEED] Eliminando datos existentes...');
   await RefugioModel.deleteMany({});

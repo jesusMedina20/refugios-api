@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import { IRefugioRepository } from '../../../domain/repositories/IRefugioRepository';
 import {
   IRefugio,
@@ -12,8 +13,20 @@ function toDomain(doc: IRefugioDocument): IRefugio {
   return doc.toJSON() as unknown as IRefugio;
 }
 
+function ensureConnected(): void {
+  // readyState: 0=disconnected, 1=connected
+  if (mongoose.connection.readyState !== 1) {
+    throw new AppError(
+      'SERVICE_UNAVAILABLE',
+      'Base de datos no disponible',
+      503
+    );
+  }
+}
+
 export class MongoRefugioRepository implements IRefugioRepository {
   async findAll(filters?: RefugioFilters): Promise<IRefugio[]> {
+    ensureConnected();
     const query: Record<string, unknown> = {};
 
     if (filters?.estado) {
@@ -36,6 +49,7 @@ export class MongoRefugioRepository implements IRefugioRepository {
   }
 
   async findById(id: string): Promise<IRefugio | null> {
+    ensureConnected();
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
       throw new AppError('VALIDATION_ERROR', 'ID inválido', 400);
     }
@@ -47,11 +61,13 @@ export class MongoRefugioRepository implements IRefugioRepository {
   }
 
   async create(data: CreateRefugioDTO): Promise<IRefugio> {
+    ensureConnected();
     const doc = await RefugioModel.create(data);
     return toDomain(doc);
   }
 
   async update(id: string, data: UpdateRefugioDTO): Promise<IRefugio | null> {
+    ensureConnected();
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
       throw new AppError('VALIDATION_ERROR', 'ID inválido', 400);
     }
