@@ -19,6 +19,8 @@ export const createRefugioSchema = z.object({
   coordinador: z.string().min(2).optional().nullable(),
   contacto: z.string().regex(phoneRegex).optional().nullable(),
   activo: z.boolean().optional().default(true),
+  latitud: z.number().min(-90).max(90).optional().nullable(),
+  longitud: z.number().min(-180).max(180).optional().nullable(),
   fuente: z.enum(['oficial', 'sociedad_civil']).optional().nullable(),
 });
 
@@ -39,6 +41,8 @@ export const updateRefugioSchema = z.object({
   coordinador: z.string().min(2).optional().nullable(),
   contacto: z.string().regex(phoneRegex).optional().nullable(),
   activo: z.boolean().optional(),
+  latitud: z.number().min(-90).max(90).optional().nullable(),
+  longitud: z.number().min(-180).max(180).optional().nullable(),
   fuente: z.enum(['oficial', 'sociedad_civil']).optional().nullable(),
 });
 

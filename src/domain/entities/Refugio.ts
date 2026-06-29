@@ -13,6 +13,8 @@ export interface IRefugio {
   servicios?: string[] | null;
   coordinador?: string | null;
   contacto?: string | null;
+  latitud?: number | null;
+  longitud?: number | null;
   activo?: boolean | null;
   fuente?: 'oficial' | 'sociedad_civil' | null;
   created_at: Date;

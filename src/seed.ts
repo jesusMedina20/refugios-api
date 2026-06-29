@@ -14,6 +14,8 @@ const refugios = [
     },
     tipo: 'refugio',
     activo: true,
+    latitud: 10.5058,
+    longitud: -66.9036,
     fuente: 'oficial',
   },
   {
@@ -26,6 +28,8 @@ const refugios = [
     },
     tipo: 'refugio',
     activo: true,
+    latitud: 10.5000,
+    longitud: -66.9300,
     fuente: 'oficial',
   },
   {
@@ -38,6 +42,8 @@ const refugios = [
     },
     tipo: 'centro_acopio',
     activo: true,
+    latitud: 10.4800,
+    longitud: -66.9300,
     fuente: 'oficial',
   },
   {
@@ -50,6 +56,8 @@ const refugios = [
     },
     tipo: 'refugio',
     activo: true,
+    latitud: 10.4950,
+    longitud: -66.9100,
     fuente: 'oficial',
   },
   {
@@ -62,6 +70,8 @@ const refugios = [
     },
     tipo: 'refugio',
     activo: true,
+    latitud: 10.5050,
+    longitud: -66.9100,
     fuente: 'oficial',
   },
   // ─── Caracas — Puntos de Resguardo ───
@@ -75,6 +85,8 @@ const refugios = [
     },
     tipo: 'punto_resguardo',
     activo: true,
+    latitud: 10.5100,
+    longitud: -66.9500,
     fuente: 'oficial',
   },
   {
@@ -87,6 +99,8 @@ const refugios = [
     },
     tipo: 'punto_resguardo',
     activo: true,
+    latitud: 10.4900,
+    longitud: -66.8400,
     fuente: 'oficial',
   },
   {
@@ -99,6 +113,8 @@ const refugios = [
     },
     tipo: 'punto_resguardo',
     activo: true,
+    latitud: 10.4950,
+    longitud: -66.8500,
     fuente: 'oficial',
   },
   {
@@ -111,6 +127,8 @@ const refugios = [
     },
     tipo: 'centro_acopio',
     activo: true,
+    latitud: 10.4970,
+    longitud: -66.8520,
     fuente: 'oficial',
   },
   {
@@ -123,6 +141,8 @@ const refugios = [
     },
     tipo: 'refugio',
     activo: true,
+    latitud: 10.4800,
+    longitud: -66.8100,
     fuente: 'oficial',
   },
   // ─── La Guaira ───
@@ -136,6 +156,8 @@ const refugios = [
     },
     tipo: 'centro_acopio',
     activo: true,
+    latitud: 10.6026,
+    longitud: -66.9332,
     fuente: 'oficial',
   },
   {
@@ -148,6 +170,8 @@ const refugios = [
     },
     tipo: 'refugio',
     activo: true,
+    latitud: 10.6100,
+    longitud: -66.8900,
     fuente: 'oficial',
   },
   {
@@ -160,6 +184,8 @@ const refugios = [
     },
     tipo: 'punto_resguardo',
     activo: true,
+    latitud: 10.6000,
+    longitud: -66.9500,
     fuente: 'oficial',
   },
   // ─── Maracay — Aragua ───
@@ -173,6 +199,8 @@ const refugios = [
     },
     tipo: 'refugio',
     activo: true,
+    latitud: 10.2469,
+    longitud: -67.5958,
     fuente: 'oficial',
   },
   // ─── Otros puntos ───
@@ -186,6 +214,8 @@ const refugios = [
     },
     tipo: 'centro_acopio',
     activo: true,
+    latitud: 10.4970,
+    longitud: -66.8700,
     fuente: 'sociedad_civil',
   },
 ];

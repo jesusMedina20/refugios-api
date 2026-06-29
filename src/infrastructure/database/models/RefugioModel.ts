@@ -14,6 +14,8 @@ export interface IRefugioDocument extends Document<Types.ObjectId> {
   servicios?: string[] | null;
   coordinador?: string | null;
   contacto?: string | null;
+  latitud?: number | null;
+  longitud?: number | null;
   activo?: boolean | null;
   fuente?: 'oficial' | 'sociedad_civil' | null;
   created_at: Date;
@@ -40,6 +42,8 @@ const refugioSchema = new Schema<IRefugioDocument>(
     coordinador: { type: String, default: null, trim: true },
     contacto: { type: String, default: null, trim: true },
     activo: { type: Boolean, default: true },
+    latitud: { type: Number, default: null },
+    longitud: { type: Number, default: null },
     fuente: {
       type: String,
       enum: ['oficial', 'sociedad_civil'],
