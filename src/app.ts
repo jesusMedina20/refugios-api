@@ -6,6 +6,7 @@ import { RefugioController } from './interfaces/controllers/RefugioController';
 import { createRefugioRoutes } from './interfaces/routes/refugioRoutes';
 import { errorHandler } from './interfaces/middleware/errorHandler';
 import { MongoRefugioRepository } from './infrastructure/database/repositories/MongoRefugioRepository';
+import { RedisCacheService } from './infrastructure/cache/RedisCacheService';
 
 async function main(): Promise<void> {
   const port = process.env.PORT ?? '3000';
@@ -17,6 +18,10 @@ async function main(): Promise<void> {
   }
 
   await connectDB(mongoUri);
+
+  // Inicializa cache Redis (la conexión es lazy — si REDIS_URL no está o falla,
+  // el cache se desactiva y la API funciona igual)
+  RedisCacheService.getInstance();
 
   const app = express();
 
