@@ -80,4 +80,21 @@ export class RefugioController {
       data: refugio,
     });
   }
+
+  async replace(req: Request, res: Response): Promise<void> {
+    const id = req.params.id as string;
+    const data = req.body as CreateRefugioDTO;
+
+    const exists = await this.repository.findById(id);
+    if (!exists) {
+      throw new AppError('NOT_FOUND', `Refugio con id '${id}' no encontrado`, 404);
+    }
+
+    const refugio = await this.repository.update(id, data);
+
+    res.json({
+      success: true,
+      data: refugio,
+    });
+  }
 }

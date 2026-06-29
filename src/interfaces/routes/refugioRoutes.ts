@@ -9,6 +9,15 @@ export function createRefugioRoutes(controller: RefugioController): Router {
   router.get('/', asyncHandler(controller.getAll.bind(controller)));
   router.get('/:id', asyncHandler(controller.getById.bind(controller)));
   router.post('/', validate(createRefugioSchema), asyncHandler(controller.create.bind(controller)));
+
+  // PUT: reemplazo completo (usa el schema de creación — nombre + ubicación obligatorios)
+  router.put(
+    '/:id',
+    validate(createRefugioSchema),
+    asyncHandler(controller.replace.bind(controller))
+  );
+
+  // PATCH: actualización parcial (solo los campos enviados)
   router.patch(
     '/:id',
     validate(updateRefugioSchema),

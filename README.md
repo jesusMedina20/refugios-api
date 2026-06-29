@@ -63,6 +63,15 @@ https://refugios-api.onrender.com
 
 ## Endpoints
 
+| Método | Ruta | Descripción |
+|--------|------|-------------|
+| `GET` | `/health` | Health check |
+| `GET` | `/refugios` | Listar todos (filtros: `?estado=`, `?tipo=`, `?activo=`) |
+| `GET` | `/refugios/:id` | Obtener por ID |
+| `POST` | `/refugios` | Crear refugio |
+| `PUT` | `/refugios/:id` | Reemplazar refugio completo (mismos campos que POST) |
+| `PATCH` | `/refugios/:id` | Actualización parcial (solo los campos enviados) |
+
 ### `GET /health`
 
 Health check del servicio.
@@ -220,6 +229,32 @@ Content-Type: application/json
   "servicios": ["alimentacion", "agua_potable", "atencion_medica"],
   "coordinador": "Protección Civil",
   "contacto": "+582123456789"
+}
+```
+
+---
+
+### `PUT /refugios/:id`
+
+Reemplazo completo de un refugio. **Requiere los mismos campos que POST** (`nombre` + `ubicacion` obligatorios). A diferencia de PATCH, si omitís un campo opcional, se guarda como `null`.
+
+```
+PUT /refugios/665a1b2c3d4e5f6a7b8c9d0f
+Content-Type: application/json
+```
+
+```json
+{
+  "nombre": "Refugio Actualizado",
+  "ubicacion": {
+    "estado": "Miranda",
+    "municipio": "Sucre",
+    "parroquia": "Petare",
+    "direccion": "Nueva dirección"
+  },
+  "tipo": "refugio",
+  "capacidad": 350,
+  "fuente": "oficial"
 }
 ```
 
