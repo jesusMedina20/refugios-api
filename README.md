@@ -32,9 +32,7 @@ cp .env.example .env
 
 Editar `.env` con la URI de MongoDB:
 
-```env
-PORT=3005
-MONGO_URI=mongodb+srv://usuario:password@cluster0.xxxxx.mongodb.net/refugios-db?retryWrites=true&w=majority
+``
 ```
 
 ```bash
